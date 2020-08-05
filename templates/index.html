@@ -1,0 +1,67 @@
+{% load static %}
+{% static "w3images" as baseUrl%}
+<!DOCTYPE html>
+<html>
+<title>Vectorify</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'w3.css' %}">
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="/" class="w3-bar-item w3-button"><b>VECTORIFY</b></a>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="#projects" class="w3-bar-item w3-button">ARTS</a>
+      <a href="#about" class="w3-bar-item w3-button">About</a>
+      {% if user.is_authenticated %}
+      <a class="w3-bar-item ">Hello {{user.first_name}}</a>
+      <a href="art_form" class="w3-bar-item w3-button">Upload Art</a>
+      <a href="accounts/logout" class="w3-bar-item w3-button">Logout</a>
+
+      {% else %}
+      <a href="accounts/register" class="w3-bar-item w3-button">Register</a>
+      <a href="accounts/login" class="w3-bar-item w3-button">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
+  <img class="w3-image" src="{% static 'w3images/architect.jpg' %}" alt="Architecture" width="1500" height="800">
+  
+</header>
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+
+  <!-- Project Section -->
+  <div class="w3-container w3-padding-32" id="projects">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">ARTS</h3>
+  </div>
+{% for arts in arts %}
+  <div class="w3-row-padding">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-display-topleft w3-black w3-padding">{{arts.owner}}<br></div>
+        <img src="{{arts.img.url}}" alt="House" style="width:100%">
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">{{arts.expectations}}</h3>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+  <!-- About Section -->
+  <div class="w3-container w3-padding-32" id="about">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">About</h3>
+    <p>Upload your vector arts and wait till some other artist is interested to upgrade or gives final touches to your work.<br>Basic idea is to be united and give the best of us and show our art to world.
+    </p>
+  </div>
+</body>
+</html>

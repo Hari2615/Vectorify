@@ -1,0 +1,79 @@
+{% load static %}
+{% static "w3images" as baseUrl%}
+<!DOCTYPE html>
+<html>
+<title>Vectorify</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'w3.css' %}">
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="/" class="w3-bar-item w3-button"><b>VECTORIFY</b></a>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="#projects" class="w3-bar-item w3-button">ARTS</a>
+     
+      
+      <a class="w3-bar-item ">Hello {{user.first_name}}</a>
+      
+      <a href="accounts/logout" class="w3-bar-item w3-button">Logout</a>
+
+     
+      <a href="accounts/register" class="w3-bar-item w3-button">Register</a>
+      <a href="accounts/login" class="w3-bar-item w3-button">Login</a>
+     
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+
+  <!-- Project Section -->
+  <div class="w3-container w3-padding-32" id="projects">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">ARTS</h3>
+  </div>
+  <form action="details" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="owner">Username</label>
+      <input type="text" id="owner" name="owner" placeholder="owner">
+    </div>
+    <div>
+      <label for="expectations">Expectations</label><br>
+      <textarea rows="2" cols="15" id="expectations" name="expectations" placeholder="expectations"></textarea>>
+    </div>
+
+    <div>
+      <label for="img">Select a file:</label>
+      <input type="file" id="img" name="img">
+    </div>
+
+    <div class="w3-inputt w3-center">
+    <input type="Submit"></div>
+</form>
+{% for arts in arts %}
+  <div class="w3-row-padding">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-display-topleft w3-black w3-padding">{{arts.owner}}<br></div>
+        <img src="{{arts.img.url}}" alt="House" style="width:100%">
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">{{arts.expectations}}</h3>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+  <!-- About Section -->
+ 
+</body>
+</html>
